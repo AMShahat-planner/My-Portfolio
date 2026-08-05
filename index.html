@@ -2386,6 +2386,44 @@ button:focus-visible {
     }
 }
 </style>
+<style>
+/* ---------------------------------------------------------------
+   Mobile navigation (added for responsive support).
+   Desktop (>=768px) is untouched: the panel and button animation
+   are both forced off at the md breakpoint below.
+   ----------------------------------------------------------------*/
+.mobile-nav-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    box-shadow: 0 12px 24px -16px rgba(27, 26, 22, .18);
+    transition: max-height .45s cubic-bezier(.22,1,.36,1), opacity .3s ease;
+}
+.mobile-nav-panel.is-open {
+    max-height: 24rem;
+    opacity: 1;
+}
+.mobile-menu-btn span {
+    transition: transform .3s cubic-bezier(.22,1,.36,1), opacity .3s ease;
+}
+.mobile-menu-btn.is-open span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+}
+.mobile-menu-btn.is-open span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+}
+@media (min-width:768px) {
+    .mobile-nav-panel {
+        display: none !important;
+        max-height: 0 !important;
+        opacity: 0 !important;
+    }
+    .mobile-menu-btn.is-open span:first-child,
+    .mobile-menu-btn.is-open span:last-child {
+        transform: none
+    }
+}
+</style>
 </head>
 <body class="font-sans antialiased">
 <div class="page" data-page="home" hidden>
@@ -2404,11 +2442,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--home" id="mobile-menu-btn--home">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--home" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--home">
             <!--$-->
@@ -2919,9 +2965,6 @@ button:focus-visible {
                                 Get in touch<span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                             </a>
                         </div>
-                        <div class="lg:col-span-4 relative min-h-[16rem]">
-                            <img alt="Portrait of Ahmed Abdelghany" loading="lazy" decoding="async" data-nimg="fill" class="object-cover object-top" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent;object-position:60% 10%;" src="portrait/formal-grey.png"/>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -2959,11 +3002,19 @@ button:focus-visible {
                     data-route="graduation" href="#graduation">Graduation Project</a><a
                     class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80"
                     data-route="contact" href="#contact">Contact</a></nav><button aria-label="Toggle menu" aria-expanded="false"
-                class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]"><span
+                class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--about" id="mobile-menu-btn--about"><span
                     class="block h-px w-6 bg-ink transition-transform duration-300 "></span><span
                     class="block h-px w-6 bg-ink transition-transform duration-300 "></span></button>
         </div>
-    </header>
+            <nav id="mobile-nav--about" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
+        </header>
     <main id="main--about"><!--$-->
         <section class="pt-40 md:pt-48 pb-20 container-edge">
             <div class="" style="opacity:0;transform:translateY(24px)">
@@ -3156,11 +3207,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--contact" id="mobile-menu-btn--contact">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--contact" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--contact">
             <!--$-->
@@ -3256,11 +3315,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--graduation" id="mobile-menu-btn--graduation">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--graduation" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--graduation">
             <!--$-->
@@ -3444,11 +3511,19 @@ button:focus-visible {
                     data-route="graduation" href="#graduation">Graduation Project</a><a
                     class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80"
                     data-route="contact" href="#contact">Contact</a></nav><button aria-label="Toggle menu" aria-expanded="false"
-                class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]"><span
+                class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--projects" id="mobile-menu-btn--projects"><span
                     class="block h-px w-6 bg-ink transition-transform duration-300 "></span><span
                     class="block h-px w-6 bg-ink transition-transform duration-300 "></span></button>
         </div>
-    </header>
+            <nav id="mobile-nav--projects" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
+        </header>
     <main id="main--projects"><!--$-->
         <section class="pt-40 md:pt-48 pb-24 md:pb-36 container-edge">
             <div class="" style="opacity:0;transform:translateY(24px)">
@@ -3843,11 +3918,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--detailed-master-plan-residential-area" id="mobile-menu-btn--project--detailed-master-plan-residential-area">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--detailed-master-plan-residential-area" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--detailed-master-plan-residential-area">
             <!--$-->
@@ -3976,11 +4059,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--landscape-design-childrens-library" id="mobile-menu-btn--project--landscape-design-childrens-library">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--landscape-design-childrens-library" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--landscape-design-childrens-library">
             <!--$-->
@@ -4095,11 +4186,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--modelling-rectangles-and-circles" id="mobile-menu-btn--project--modelling-rectangles-and-circles">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--modelling-rectangles-and-circles" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--modelling-rectangles-and-circles">
             <!--$-->
@@ -4210,11 +4309,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--modelling-shopping-mall" id="mobile-menu-btn--project--modelling-shopping-mall">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--modelling-shopping-mall" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--modelling-shopping-mall">
             <!--$-->
@@ -4326,11 +4433,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--modern-house-extra-space-granted" id="mobile-menu-btn--project--modern-house-extra-space-granted">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--modern-house-extra-space-granted" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--modern-house-extra-space-granted">
             <!--$-->
@@ -4443,11 +4558,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--modern-house-glass-facades" id="mobile-menu-btn--project--modern-house-glass-facades">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--modern-house-glass-facades" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--modern-house-glass-facades">
             <!--$-->
@@ -4560,11 +4683,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--national-land-use-north-west-coast" id="mobile-menu-btn--project--national-land-use-north-west-coast">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--national-land-use-north-west-coast" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--national-land-use-north-west-coast">
             <!--$-->
@@ -4700,11 +4831,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--specialized-regions-suez-canal" id="mobile-menu-btn--project--specialized-regions-suez-canal">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--specialized-regions-suez-canal" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--specialized-regions-suez-canal">
             <!--$-->
@@ -4820,11 +4959,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--urban-design-pottery-craft-school" id="mobile-menu-btn--project--urban-design-pottery-craft-school">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--urban-design-pottery-craft-school" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--urban-design-pottery-craft-school">
             <!--$-->
@@ -4944,11 +5091,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--urban-planning-el-saf-city" id="mobile-menu-btn--project--urban-planning-el-saf-city">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--urban-planning-el-saf-city" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--urban-planning-el-saf-city">
             <!--$-->
@@ -5069,11 +5224,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--urban-planning-new-beni-suef" id="mobile-menu-btn--project--urban-planning-new-beni-suef">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--urban-planning-new-beni-suef" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--urban-planning-new-beni-suef">
             <!--$-->
@@ -5193,11 +5356,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--urban-planning-new-sphinx" id="mobile-menu-btn--project--urban-planning-new-sphinx">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--urban-planning-new-sphinx" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--urban-planning-new-sphinx">
             <!--$-->
@@ -5325,11 +5496,19 @@ button:focus-visible {
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
                     <a class="link-underline text-[0.82rem] tracking-wide uppercase font-mono text-ink/80" data-route="contact" href="#contact">Contact</a>
                 </nav>
-                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]">
+                <button aria-label="Toggle menu" aria-expanded="false" class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] mobile-menu-btn" aria-controls="mobile-nav--project--urban-readiness-regional-competitiveness" id="mobile-menu-btn--project--urban-readiness-regional-competitiveness">
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                     <span class="block h-px w-6 bg-ink transition-transform duration-300 "></span>
                 </button>
             </div>
+            <nav id="mobile-nav--project--urban-readiness-regional-competitiveness" class="mobile-nav-panel md:hidden bg-paper border-t border-line" aria-label="Mobile">
+                <div class="container-edge flex flex-col py-2">
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="about" href="#about">About</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="projects" href="#projects">Projects</a>
+                    <a class="block py-4 border-b border-line font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="graduation" href="#graduation">Graduation Project</a>
+                    <a class="block py-4 font-mono text-[0.82rem] tracking-wide uppercase text-ink/80" data-route="contact" href="#contact">Contact</a>
+                </div>
+            </nav>
         </header>
         <main id="main--project--urban-readiness-regional-competitiveness">
             <!--$-->
@@ -5511,6 +5690,76 @@ button:focus-visible {
 
   // initial page load
   showPage(currentKey(), {skipScroll: true});
+})();
+</script>
+<script>
+(function() {
+  // Mobile navigation menu: wires up the hamburger toggle button on every
+  // page header to show/hide its adjacent mobile nav panel.
+  function closeMenu(btn, panel) {
+    if (!btn || !panel) return;
+    btn.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    panel.classList.remove('is-open');
+  }
+
+  function openMenu(btn, panel) {
+    if (!btn || !panel) return;
+    btn.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    panel.classList.add('is-open');
+  }
+
+  function closeAllMenus(exceptBtn) {
+    var openBtns = document.querySelectorAll('.mobile-menu-btn.is-open');
+    openBtns.forEach(function(btn) {
+      if (btn === exceptBtn) return;
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      closeMenu(btn, panel);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.mobile-menu-btn');
+    if (btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var isOpen = btn.classList.contains('is-open');
+      closeAllMenus();
+      if (isOpen) {
+        closeMenu(btn, panel);
+      } else {
+        openMenu(btn, panel);
+      }
+      return;
+    }
+
+    // Close the menu whenever a nav link (or anything else) outside an
+    // open panel/button is clicked.
+    if (!e.target.closest('.mobile-nav-panel') && !e.target.closest('.mobile-menu-btn')) {
+      closeAllMenus();
+    }
+  });
+
+  // Close on route change (hash navigation).
+  window.addEventListener('hashchange', function() {
+    closeAllMenus();
+  });
+
+  // Close on Escape key for accessibility.
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      closeAllMenus();
+    }
+  });
+
+  // If the viewport is resized past the mobile breakpoint while the menu
+  // is open, reset its state so it doesn't reappear collapsed-but-open
+  // when the viewport shrinks back down.
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768) {
+      closeAllMenus();
+    }
+  });
 })();
 </script>
 
